@@ -5,10 +5,12 @@ import (
 	"net/url"
 
 	"github.com/ChimeraCoder/anaconda"
+	"github.com/jcox250/tweetfeed/domain"
 )
 
 type twitterInteractor interface {
 	GetSearch(string, url.Values) (anaconda.SearchResponse, error)
+	GetUserTimeline(string, url.Values) []domain.Tweet
 }
 
 type TwitterService struct {
@@ -32,4 +34,9 @@ func (t *TwitterService) Search(searchTerm string, values url.Values) anaconda.S
 		)
 	}
 	return results
+}
+
+func (t *TwitterService) GetUserTimeline(user string, values url.Values) []domain.Tweet {
+	tweets := t.interactor.GetUserTimeline(user, values)
+	return tweets
 }
