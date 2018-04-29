@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    environment:
-      PORT: ":7000"
+    env_file:
+      - .env
     ports: 
       - "7000:7000"
