@@ -5,7 +5,7 @@ import (
 	"net/url"
 
 	"github.com/ChimeraCoder/anaconda"
-	"github.com/jcox250/tweetfeed/domain"
+	"github.com/jcox250/tweets/domain"
 )
 
 type TwitterInteractor struct {

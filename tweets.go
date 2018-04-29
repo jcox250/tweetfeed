@@ -8,8 +8,8 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/jcox250/tweetfeed/adapters/service"
-	"github.com/jcox250/tweetfeed/usecases"
+	"github.com/jcox250/tweets/adapters/service"
+	"github.com/jcox250/tweets/usecases"
 )
 
 var accessToken = os.Getenv("ACCESS_TOKEN")
