@@ -5,31 +5,38 @@ import (
 	"log"
 	"os"
 
+	"github.com/jcox250/tweetfeed/adapters/service"
 	"github.com/jcox250/tweetfeed/usecases"
 )
 
 var accessToken = os.Getenv("ACCESS_TOKEN")
 var accessTokenSecret = os.Getenv("ACCESS_TOKEN_SECRET")
+var consumerKey = os.Getenv("CONSUMER_KEY")
+var consumerKeySecret = os.Getenv("CONSUMER_KEY_SECRET")
 
 func checkEnvVars() {
 	if accessToken == "" {
 		log.Fatal("ACCESS_TOKEN envvar is not set")
 	}
-	log.Printf("ACCESS_TOKEN: %s", accessToken)
 
 	if accessTokenSecret == "" {
 		log.Fatal("ACCESS_TOKEN_SECRET envvar is not set")
 	}
-	log.Printf("ACCESS_TOKEN_SECRET: %s", accessTokenSecret)
+
+	if consumerKey == "" {
+		log.Fatal("CONSUMER_KEY envvar is not set")
+	}
+	if consumerKeySecret == "" {
+		log.Fatal("CONSUMER_KEY_SECRET envvar is not set")
+	}
 }
 
 func main() {
 	checkEnvVars()
-	i := usecases.NewTwitterInteractor(accessToken, accessTokenSecret)
-	results, err := i.GetSearch("golang", nil)
-	if err != nil {
-		log.Fatalf("couldn't get tweets: %s", err)
-	}
+	twitterInteractor := usecases.NewTwitterInteractor(accessToken, accessTokenSecret, consumerKey, consumerKeySecret)
+	twitterService := service.NewTwitterService(twitterInteractor)
+
+	results := twitterService.Search("golang", nil)
 
 	fmt.Println(results)
 }

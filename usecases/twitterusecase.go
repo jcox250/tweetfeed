@@ -10,9 +10,14 @@ type TwitterInteractor struct {
 	api *anaconda.TwitterApi
 }
 
-func NewTwitterInteractor(accessToken, accessTokenSecret string) TwitterInteractor {
+func NewTwitterInteractor(accessToken, accessTokenSecret, consumerKey, consumerKeySecret string) TwitterInteractor {
 	return TwitterInteractor{
-		api: anaconda.NewTwitterApi(accessToken, accessTokenSecret),
+		api: anaconda.NewTwitterApiWithCredentials(
+			accessToken,
+			accessTokenSecret,
+			consumerKey,
+			consumerKeySecret,
+		),
 	}
 }
 

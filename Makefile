@@ -8,7 +8,6 @@ endif
 build:
 	docker-compose build
 
-run:
-	docker-compose build
+run: build
 	docker-compose up
 
